@@ -1,6 +1,6 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import type { InvestmentInput } from '../investment-input.model';
+import { InvestmentService } from '../investement.service';
 
 @Component({
   selector: 'app-user-input',
@@ -10,17 +10,16 @@ import type { InvestmentInput } from '../investment-input.model';
   imports: [FormsModule],
 })
 export class UserInputComponent {
- calculate = output<InvestmentInput>();
 
   enteredInitialInvestment = signal('0');
   enteredAnnualInvestment = signal('0');
   enteredExpectedReturn = signal('5');
   enteredDuration = signal('10');
 
+  constructor(private investementService: InvestmentService) { }
+
   onSubmit() {
-    // Emit the values as numbers
-    // the + transforms the string into a number
-    this.calculate.emit({
+    this.investementService.calculateInvestmentResults({
       initialInvestment: +this.enteredInitialInvestment(),
       duration: +this.enteredDuration(),
       expectedReturn: +this.enteredExpectedReturn(),
