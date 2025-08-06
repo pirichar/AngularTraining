@@ -8,7 +8,7 @@ export interface Task {
 
 
 export interface NewTask {
-	titel: string; 
+	title : string; 
 	summary: string; 
 	date: string;
 }
