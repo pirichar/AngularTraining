@@ -31,6 +31,13 @@ export class TaskService {
 		},
 	];
 
+	constructor() {
+		//if no task found we keep the dummy tasks if tasks are found in the local cache they become the tasks
+		const tasks = localStorage.getItem('tasks');
+		if (tasks){
+			this.dummyTasks = JSON.parse(tasks);
+		}
+	}
 	getUserTasks(userId: string) {
 		return this.dummyTasks.filter((task) => task.userId === userId);
 	}
@@ -42,10 +49,15 @@ export class TaskService {
 			title: taskData.title,
 			summary: taskData.summary,
 			dueDate: taskData.date
-		})
+		});
+		this.saveTask();
 	}
-
 	removeTask(id:string){
 		this.dummyTasks = this.dummyTasks.filter((task) => task.id !== id);
+		this.saveTask();
+	}
+
+	private saveTask(){
+		localStorage.setItem('tasks', JSON.stringify(this.dummyTasks));
 	}
 }
