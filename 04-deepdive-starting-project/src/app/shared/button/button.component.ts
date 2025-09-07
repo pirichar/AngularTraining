@@ -1,10 +1,10 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 
 //here we use the attribute selector instead of the element selector
 //this allows us to use the button component as a directive on a native button element
 // which makes our code leaner and more semantic
 @Component({
-  selector: 'button[appButton]. a[appButton]', 
+  selector: 'button[appButton], a[appButton]', 
   standalone: true,
   imports: [],
   templateUrl: './button.component.html',
@@ -12,8 +12,5 @@ import { Component, input } from '@angular/core';
 })
 export class ButtonComponent {
 
-  constructor() {
-    
-   }
 
 }
